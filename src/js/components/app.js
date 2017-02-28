@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import AppActions from '../action/app-actions';
+import Catalog from './catalog/app-catalog'
+import CatalogDetail from './product/app-catalogdetail'
+import Cart from './cart/app-cart'
+import Template from './app-template'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 
-
-class App extends Component {
-  render() {
-    return (
-      <h1
-        onClick={AppActions.addItem.bind(null, 'this is the item')}
-      >A Flux App</h1>
-    );
-  }
+export default () => {
+	return (
+		<Router history={hashHistory}>
+			<Route path="/" component={Template}>
+				<IndexRoute component={Catalog} />
+				<Route path="cart" component={Cart} />
+				<Route path="item/:item" component={CatalogDetail} />
+			</Route>
+		</Router>
+		);
 }
-
-export default App;
